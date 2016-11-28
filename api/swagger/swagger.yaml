@@ -35,6 +35,25 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+    post:
+      description: Add a new book
+      parameters:
+      - name: book
+        description: Book properties
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/Book"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+         # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -53,6 +72,12 @@ definitions:
       - title
       - author
       - year  
+  GeneralResponse:
+    properties:
+      message:
+        type: string
+    required:
+      - message
   ErrorResponse:
     properties:
       message:
