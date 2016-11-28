@@ -18,25 +18,18 @@ consumes:
 produces:
   - application/json
 paths:
-  /hello:
-    # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
+  /books:
+    x-swagger-router-controller: book-controller
     get:
-      description: Returns 'Hello' to the caller
-      # used as the method name of the controller
-      operationId: hello
-      parameters:
-        - name: name
-          in: query
-          description: The name of the person to whom to say hello
-          required: false
-          type: string
+      operationId: getAll
+      description: Return a books list
       responses:
         "200":
-          description: Success
+          description: Success 
           schema:
-            # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
+            type: array
+            items:
+              $ref: '#/definitions/Book'
         # responses may fall through to errors
         default:
           description: Error
@@ -46,15 +39,23 @@ paths:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
 definitions:
-  HelloWorldResponse:
-    required:
-      - message
+  Book:
     properties:
-      message:
+      id:
         type: string
+      title:
+        type: string
+      author:
+        type: string
+      year:
+        type: integer
+    required:
+      - title
+      - author
+      - year  
   ErrorResponse:
-    required:
-      - message
     properties:
       message:
         type: string
+    required:
+      - message
