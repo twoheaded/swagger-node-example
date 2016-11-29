@@ -54,6 +54,25 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /books/{id}:
+    x-swagger-router-controller: book-controller
+    get:
+      operationId: find
+      description: Return Book by id
+      parameters:
+      - name: id
+        type: string
+        in: path
+        required: true
+      responses:
+        "200":
+          description: Success 
+          schema:
+            $ref: '#/definitions/Book'
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
