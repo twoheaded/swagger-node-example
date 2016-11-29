@@ -73,6 +73,31 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+            
+    put:
+      description: Update a book
+      parameters:
+      - name: id
+        description: Book id
+        type: string
+        in: path
+        required: true
+      - name: book
+        description: Book properties
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/Book"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+         # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
