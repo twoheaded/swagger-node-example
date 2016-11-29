@@ -36,6 +36,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
     post:
+      operationId: create
       description: Add a new book
       parameters:
       - name: book
@@ -75,6 +76,7 @@ paths:
             $ref: "#/definitions/ErrorResponse"
             
     put:
+      operationId: update
       description: Update a book
       parameters:
       - name: id
@@ -99,6 +101,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
     delete:
+      operationId: remove
       description: Delite a book by ID
       parameters:
       - name: id
