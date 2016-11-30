@@ -21,15 +21,15 @@ paths:
   /books:
     x-swagger-router-controller: book-controller
     get:
-      operationId: getAll
       description: Return a books list
+      parameters:
+        - $ref: "#/parameters/skipParam"
+        - $ref: "#/parameters/limitParam"
       responses:
         "200":
           description: Success 
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Book'
+            $ref: '#/definitions/Books'
         # responses may fall through to errors
         default:
           description: Error
@@ -123,6 +123,24 @@ paths:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
 definitions:
+  Books:
+    properties:
+      paging:
+        type: object
+        properties:
+          skip:
+            type: integer
+          limit: 
+            type: integer
+          count: 
+            type: integer
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/Book'
+    required:
+        - paging
+        - data
   Book:
     properties:
       id:
@@ -149,3 +167,22 @@ definitions:
         type: string
     required:
       - message
+      
+parameters:
+  skipParam:
+    name: skip
+    in: query
+    description: number of items to skip
+    required: false
+    type: integer
+    format: int32
+    minimum: 0
+  limitParam:
+    name: limit
+    in: query
+    description: max records to return
+    required: false
+    type: integer
+    format: int32
+    maximum: 100
+    minimum: 0
