@@ -11,12 +11,26 @@ module.exports = {
 };
 
 function getAll(req, res) {
-    Book.find({}, function (err, books) {
-        if (err) {
-            throw err;
-        } else {
-            res.json(books);
-        }
+    var skip = req.swagger.params.skip.value ? req.swagger.params.skip.value : 0;
+    var limit = req.swagger.params.limit.value ? req.swagger.params.limit.value : 10;
+
+    Book.find().count(function (err, count) {
+
+        Book.find().skip(skip).limit(limit).exec(function (err, books) {
+            if (err) {
+                throw err;
+            } else {
+                res.json({
+                        paging: {
+                            count: count,
+                            skip: skip,
+                            limit: limit
+                        },
+                        data: books
+                    }
+                );
+            }
+        });
     });
 }
 

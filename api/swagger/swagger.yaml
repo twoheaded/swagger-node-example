@@ -21,6 +21,7 @@ paths:
   /books:
     x-swagger-router-controller: book-controller
     get:
+      operationId: getAll
       description: Return a books list
       parameters:
         - $ref: "#/parameters/skipParam"
