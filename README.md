@@ -4,6 +4,8 @@
 
 Добавлнна [пагинация](http://mean-dev.info/swagger-pagination) в ответе на запрос `GET /books`.
 
+Добавлена [авторизация](http://mean-dev.info/authentication-rest-api-swagger/) по JSON Web Token (JWT).
+
 Должен быть запущен `mongod`, установлен глобально [Swagger Node](https://github.com/swagger-api/swagger-node).
 
 Запуск сервера:
